@@ -1,16 +1,17 @@
-import Sidebar from './sidebar'
-import Header from './header'
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
+import AdminSideBar from '../admin-view/Sidebar'
+import AdminHeader from '../admin-view/Header'
 
 function Adminlayout() {
+
+  const [openSidebar,setOpenSidebar ] =  useState(false)
+
   return (
     <div className='flex min-h-screen w-full'>
-        <Sidebar/>
-
+        <AdminSideBar open={openSidebar} setOpen={setOpenSidebar}/>
         <div className='flex flex-1 flex-col'>
-            <Header/>
-
+            <AdminHeader setOpen={setOpenSidebar} />
             <main className='flex-1 flex bg-muted/40 p-4 md:p-6'>
                 <Outlet/>
             </main>

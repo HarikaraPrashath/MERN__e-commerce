@@ -19,7 +19,7 @@
   import UnAuthPage from "./pages/unAuth/index";
   import { useSelector, useDispatch } from "react-redux";
   import { useEffect } from "react";
-  import { checkAuth } from "./store/auth-slice";
+  import { checkAuth } from "./store/auth-slice/index";
   import { Skeleton } from "@/components/ui/skeleton"
 
 
@@ -53,23 +53,23 @@
           <Route
             path="/admin"
             element={
-              <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+              // <CheckAuth isAuthenticated={isAuthenticated} user={user}>
                 <Adminlayout />
-              </CheckAuth>
+              // </CheckAuth>
             }
           >
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="products" element={<Product />} />
             <Route path="feature" element={<Feature />} />
-            <Route path="order" element={<Order />} />
+            <Route path="orders" element={<Order />} />
           </Route>
 
           <Route
             path="/shop"
             element={
-              <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+              //  <CheckAuth isAuthenticated={isAuthenticated} user={user}>
                 <ShoppingLayout />
-              </CheckAuth>
+              // </CheckAuth>
             }
           >
             <Route path="home" element={<Home />} />

@@ -4,7 +4,7 @@ import CommonFrom from '../../components/common/form';
 import { loginFormControls } from '../../config/index';
 import { useDispatch } from 'react-redux';
 import { useToast } from '@/hooks/use-toast';
-import { loginUser } from '@/store/auth-slice';
+import { loginUser } from '@/store/auth-slice/index';
 
 
 const initialState = {

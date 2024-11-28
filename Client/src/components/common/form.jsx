@@ -1,4 +1,4 @@
-import { SelectContent, SelectItem, SelectTrigger, SelectValue } from '@radix-ui/react-select';
+import { SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label'
 import { Select } from '../ui/select'
@@ -21,7 +21,7 @@ function renderInputsByComponentType(getControlItem){
       element = (
       <Input
       name={getControlItem.name}
-      placeholder={getControlItem.placeholder}
+      placeholder={getControlItem.label}
       id={getControlItem.name}
       type={getControlItem.type}
       value={value}
@@ -35,30 +35,30 @@ function renderInputsByComponentType(getControlItem){
       break;
 
       case 'select':
-        element = (
-        <Select onOpenChange={(value)=> setFormData({
+  element = (
+    <Select
+      onValueChange={(selectedValue) =>
+        setFormData({
           ...formData,
-          [getControlItem.name] :value
-        })} value={value}>
-        <SelectTrigger className='w-full'>
-          <SelectValue placeholder ={getControlItem.placeholder}/>
-        </SelectTrigger>
-        <SelectContent>
-          {
-            getControlItem.options &&
-            getControlItem?.options.length>0?
-            getControlItem.options.map(optionItem=><SelectItem key={optionItem.id} value={optionItem.id}>
-              {
-                optionItem.label
-              }
-            </SelectItem>) : null
-          }
-        </SelectContent>
-        </Select>
-        )
-        
-        break;
-  
+          [getControlItem.name]: selectedValue,
+        })
+      }
+      value={formData[getControlItem.name] || ''}
+    >
+      <SelectTrigger className="w-full">
+        <SelectValue placeholder={getControlItem.placeholder } />
+      </SelectTrigger>
+      <SelectContent>
+        {getControlItem.options?.map((optionItem) => (
+          <SelectItem key={optionItem.id} value={optionItem.id}>
+            {optionItem.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+  break;
+
         
         case 'textarea':
           element = (

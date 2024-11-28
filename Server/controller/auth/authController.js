@@ -44,14 +44,17 @@ const registerUser = async (req, res) => {
       if (!checkUser)
         return res.json({
           success: false,
-          message: "User doesn't exist! Please register first.",
+          message: "User doesn't exists! Please register first",
         });
   
-      const checkPasswordMatch = await bcrypt.compare(password, checkUser.password);
+      const checkPasswordMatch = await bcrypt.compare(
+        password,
+        checkUser.password
+      );
       if (!checkPasswordMatch)
         return res.json({
           success: false,
-          message: "Incorrect password! Please try again.",
+          message: "Incorrect password! Please try again",
         });
   
       const token = jwt.sign(
@@ -65,10 +68,7 @@ const registerUser = async (req, res) => {
         { expiresIn: "60m" }
       );
   
-      res.cookie('token', token, {
-        httpOnly: true,
-        secure: false, 
-      }).json({
+      res.cookie("token", token, { httpOnly: true, secure: false }).json({
         success: true,
         message: "Logged in successfully",
         user: {
@@ -79,10 +79,10 @@ const registerUser = async (req, res) => {
         },
       });
     } catch (e) {
-      console.error(e);
+      console.log(e);
       res.status(500).json({
         success: false,
-        message: "Some error occurred",
+        message: "Some error occured",
       });
     }
   };
@@ -103,7 +103,7 @@ const registerUser = async (req, res) => {
     if (!token)
       return res.status(401).json({
         success: false,
-        message: "Unauthorised token error user!",
+        message: "Unauthorised user!",
       });
   
     try {

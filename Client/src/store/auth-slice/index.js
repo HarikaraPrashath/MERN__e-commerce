@@ -60,13 +60,11 @@ export const logoutUser = createAsyncThunk('/auth/logout',
       const response = await axios.get(
         "http://localhost:5000/api/auth/check-auth",
         {
-          // withCredentials: true, 
-          // headers: {
-          //   "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
-          // },
+          withCredentials: true,
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+          "Cache-Control":
+            "no-store, no-cache, must-revalidate, proxy-revalidate",
+        },
         }
       );
       return response.data;
@@ -114,7 +112,6 @@ export const logoutUser = createAsyncThunk('/auth/logout',
           state.isLoading = true;
         })
         .addCase(checkAuth.fulfilled, (state, action) => {
-          console.log("CheckAuth Response:", action.payload);
           state.isLoading = false;
           state.user = action.payload.success ? action.payload.user : null;
           state.isAuthenticated = action.payload.success;
